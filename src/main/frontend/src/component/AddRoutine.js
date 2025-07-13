@@ -2,7 +2,8 @@ import {useState} from "react";
 import axios from 'axios';
 import "./RoutineList.css";
 
-export default function AddRoutine({isOpen, closeModal}) {
+export default function AddRoutine({userId, isOpen, closeModal}) {
+     const [routineName, setRoutineName] = useState('');
      const [startDate, setStartDate] = useState('');
      const [endDate, setEndDate] = useState('');
      const [selectedDays, setSelectedDays] = useState([]);
@@ -27,16 +28,21 @@ export default function AddRoutine({isOpen, closeModal}) {
      const handleSubmit = async (e) => {
          e.preventDefault();
 
-         const routineDate = {
-             startDate,
-             endDate,
-             selectedDays,
-         };
-
          try {
-             const res = await axios.post('/api/routine', routineDate);
+             const res = await axios.post('/api/routine', {
+                 userId: userId,
+                 name: routineName,
+                 repeatDays: selectedDays,
+                 startDate: startDate,
+                 endDate: endDate
+             });
              if(res.data.success) {
                  alert(res.data.message);
+                 closeModal();
+                 setRoutineName('');
+                 setStartDate('');
+                 setEndDate('');
+                 setSelectedDays([]);
              }
              else {
                  console.log("루틴 등록 실패");
@@ -74,7 +80,7 @@ export default function AddRoutine({isOpen, closeModal}) {
 
                      <form className={"AR_form"}>
                          <div>
-                             <input type="text" className={"AR_routineName"} placeholder={"루틴 이름"}></input>
+                             <input type="text" className={"AR_routineName"} placeholder={"루틴 이름"} value={routineName} onChange={(e) => setRoutineName(e.target.value)}></input>
                          </div>
                          <div>
                              <label htmlFor="start-date" className={"AR_inputLabel"}>시작일 &nbsp;&nbsp;| &nbsp;&nbsp;</label>
