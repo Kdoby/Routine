@@ -4,6 +4,7 @@ import MonthlyView from "./component/MonthlyView";
 import WeeklyView from "./component/WeeklyView";
 
 function App() {
+
     return (
         <div style={{display: "flex", margin: "10%", marginTop:"5%"}}>
             <RoutineList />
