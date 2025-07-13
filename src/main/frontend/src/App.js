@@ -1,19 +1,26 @@
 import './App.css';
-import React, {useEffect, useState} from 'react';
-import axios from 'axios';
+import RoutineList from "./component/RoutineList";
+import MonthlyView from "./component/MonthlyView";
+import WeeklyView from "./component/WeeklyView";
 
 function App() {
-   const [hello, setHello] = useState('')
-
-    useEffect(() => {
-        axios.get('/api/hello')
-        .then(response => setHello(response.data))
-        .catch(error => console.log(error))
-    }, []);
-
     return (
-        <div>
-            백엔드에서 가져온 데이터입니다 : {hello}
+        <div style={{display: "flex", margin: "10%", marginTop:"5%"}}>
+            <RoutineList />
+            <div style={{display: "flex", flexDirection: "column"}}>
+                <div className={"RoutineHeader"}>
+                    <button className={"CurrentDate"} >현재 날짜로 이동</button>
+                    <div className={"DateNavigator"} >
+                        <h2 className={"DateNavLabel"}>2025-07-07</h2>
+                    </div>
+                </div>
+                <div className={"RoutineNavigator"} >
+                    <div className={"ViewButton"}><p className={"ViewMonthly"}>월간</p></div>
+                    <div className={"ViewButton"}><p className={"ViewWeekly"}>주간</p></div>
+                </div>
+                <WeeklyView />
+            </div>
+
         </div>
     );
 }

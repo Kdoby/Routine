@@ -1,0 +1,32 @@
+.completedDay {
+    background-color: gray;
+    border-radius: 5px;
+    width: 25px;
+    height: 25px;
+    margin: 2px;
+    display: inline-grid;
+}
+
+.MR_wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.MR_wrapper > p {
+    flex: 1;
+}
+
+.MR_completedDays{
+    flex: 8;
+    width: 203px;
+}
+
+.MR_stat{
+    flex:1;
+}
+
+.MR_achieve, .MR_num {
+    display: inline-block;
+    padding: 22px;
+}

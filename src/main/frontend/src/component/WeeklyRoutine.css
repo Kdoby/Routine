@@ -1,0 +1,48 @@
+/* WeeklyView.js */
+.WR_view_wrapper {
+    background-color: #f3f3f3;
+    border-radius: 20px;
+    border: none;
+    width: 1010px;
+    height: 758px;
+    margin: 2px;
+}
+
+.WR_date_label_wrapper {
+    margin-left: 374px;
+}
+
+.WR_date_label {
+    display: inline-block;
+    padding: 14.5px;
+}
+
+/* WeeklyRoutine.js */
+.WR_wrapper {
+    display: flex;
+    width: 789px;
+    height: 39px;
+    align-content: center;
+}
+
+.WR_name {
+    flex: 4;
+}
+
+.WR_achieve {
+
+}
+
+.WR_log_wrapper {
+    margin: 10px;
+}
+
+.WR_log_date {
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    background-color: #d9d9d9;
+    display: inline-block;
+    margin-left: 30px;
+}
