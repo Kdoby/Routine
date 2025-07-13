@@ -7,6 +7,7 @@ import WeeklyView from "./component/WeeklyView";
 
 function App() {
     const [userId, setUserId] = useState('');
+    const [selectedView, setSelectedView] = useState(true);
     return (
         <div style={{display: "flex", margin: "10%", marginTop:"5%"}}>
             <RoutineList userId={userId}/>
@@ -19,10 +20,19 @@ function App() {
                     </div>
                 </div>
                 <div className={"RoutineNavigator"} >
-                    <div className={"ViewButton"}><p className={"ViewMonthly"}>월간</p></div>
-                    <div className={"ViewButton"}><p className={"ViewWeekly"}>주간</p></div>
+                    <div className={"ViewButton"} onClick={() => {
+                        if (selectedView !== true) {
+                            setSelectedView(true);
+                        }
+                    }}><p className={"ViewMonthly"} style={{color: selectedView ? 'black' : 'lightgray'}}>월간</p></div>
+                    <div className={"ViewButton"} onClick={() => {
+                        if (selectedView !== false) {
+                            setSelectedView(false);
+                        }
+                    }}><p className={"ViewWeekly"} style={{color: !selectedView ? 'black' : 'lightgray'}}>주간</p></div>
                 </div>
-                <WeeklyView />
+                {selectedView && <MonthlyView />}
+                {!selectedView && <WeeklyView />}
             </div>
 
         </div>
