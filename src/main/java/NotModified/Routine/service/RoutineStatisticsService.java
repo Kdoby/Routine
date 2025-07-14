@@ -68,7 +68,7 @@ public class RoutineStatisticsService {
         double completionRate = size == 0 ? 0.0 : (double) completeCount / size;
 
         return DailyStatisticsResponse.builder()
-                .dailyStatic(completionRate)
+                .dailyStatistic(completionRate)
                 .routines(result)
                 .build();
     }
@@ -140,7 +140,7 @@ public class RoutineStatisticsService {
                     .name(routine.getName())
                     .days(days)
                     .isClosed(routine.getIsClosed())
-                    .weeklyStatic(completionRate)
+                    .weeklyStatistic(completionRate)
                     .build());
         }
 
@@ -213,7 +213,7 @@ public class RoutineStatisticsService {
                     .name(routine.getName())
                     .dates(dates)
                     .isClosed(routine.getIsClosed())
-                    .monthlyStatic(completionRate)
+                    .monthlyStatistic(completionRate)
                     .build());
         }
 
