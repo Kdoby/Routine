@@ -17,5 +17,5 @@ public class WeeklyStatisticsResponse {
     private Boolean isClosed;
     // 루틴을 실행한 요일 목록
     private List<Integer> days;
-    private double weeklyStatic;
+    private double weeklyStatistic;
 }

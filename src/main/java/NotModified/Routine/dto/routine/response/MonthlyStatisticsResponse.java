@@ -19,5 +19,5 @@ public class MonthlyStatisticsResponse {
     private Boolean isClosed;
     // 루틴을 실행한 날짜 목록
     private List<LocalDate> dates;
-    private double monthlyStatic;
+    private double monthlyStatistic;
 }
