@@ -24,4 +24,8 @@ public class RepeatDaysService {
         }
     }
 
+    // 반복 요일 삭제
+    public void removeRepeatDays(Long routineId) {
+        repeatDaysRepository.deleteByRoutineId(routineId);
+    }
 }
