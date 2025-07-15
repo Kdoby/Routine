@@ -2,16 +2,27 @@ package NotModified.Routine.service;
 
 import NotModified.Routine.domain.Routine;
 import NotModified.Routine.dto.routine.request.RoutineCreateRequest;
+import NotModified.Routine.dto.routine.request.RoutineUpdateRequest;
 import NotModified.Routine.repository.interfaces.RoutineRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.swing.text.html.Option;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
 
 @Service
 @Transactional
 @RequiredArgsConstructor
 public class RoutineService {
     private final RoutineRepository routineRepository;
+
+    public Routine findById(Long id) {
+        return routineRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 루틴입니다."));
+    }
 
     public Long registerRoutine(RoutineCreateRequest dto) {
         Routine newRoutine = Routine.builder()
@@ -30,4 +41,18 @@ public class RoutineService {
         return newRoutine.getId();
     }
 
+    // 루틴 수정
+    public void updateRoutine(RoutineUpdateRequest dto) {
+        Routine routine = findById(dto.getRoutineId());
+
+        if(dto.getName() != null) routine.setName(dto.getName());
+        if(dto.getStartDate() != null) routine.setStartDate(dto.getStartDate());
+        if(dto.getEndDate() != null) routine.setEndDate(dto.getEndDate());
+    }
+
+    // 루틴 삭제
+    public void removeRoutine(Long routineId) {
+        Routine routine = findById(routineId);
+        routineRepository.delete(routine);
+    }
 }

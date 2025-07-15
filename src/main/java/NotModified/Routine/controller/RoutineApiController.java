@@ -2,6 +2,7 @@ package NotModified.Routine.controller;
 
 import NotModified.Routine.dto.routine.request.LogUpdateRequest;
 import NotModified.Routine.dto.routine.request.RoutineCreateRequest;
+import NotModified.Routine.dto.routine.request.RoutineUpdateRequest;
 import NotModified.Routine.dto.routine.response.DailyStatisticsResponse;
 import NotModified.Routine.dto.routine.response.MonthlyStatisticsResponse;
 import NotModified.Routine.dto.routine.response.WeeklyStatisticsResponse;
@@ -73,6 +74,29 @@ public class RoutineApiController {
                                                                 @PathVariable("year") int year,
                                                                 @PathVariable("month") int month) {
         return routineStatisticsService.getMonthlyStatisticsForAllRoutines(userId, year, month);
+    }
+
+    @PutMapping("/routine")
+    public ResponseEntity<?> updateRoutine(@RequestBody RoutineUpdateRequest request) {
+        routineService.updateRoutine(request);
+        routineLogService.updateRoutineLog(request);
+
+        return ResponseEntity.ok(Map.of(
+                "success", true,
+                "message", "루틴 수정 성공"
+        ));
+    }
+
+    @DeleteMapping("/routine/{routineId}")
+    public ResponseEntity<?> deleteRoutine(@PathVariable("routineId") Long id) {
+        routineService.removeRoutine(id);
+        routineLogService.removeRoutineLog(id);
+        repeatDaysService.removeRepeatDays(id);
+
+        return ResponseEntity.ok(Map.of(
+                "success", true,
+                "message", "루틴 삭제 성공"
+        ));
     }
 
 }
