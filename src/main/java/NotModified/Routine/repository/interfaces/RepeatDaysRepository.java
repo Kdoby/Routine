@@ -12,4 +12,6 @@ public interface RepeatDaysRepository extends JpaRepository<RepeatDays, Long> {
     @Query("SELECT rd.weekOfDay FROM RepeatDays rd " +
             "WHERE rd.routineId = :routineId")
     List<Integer> findRepeatDays(@Param("routineId") Long routineId);
+
+    void deleteByRoutineId(Long routineId);
 }

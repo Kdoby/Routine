@@ -13,6 +13,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DailyStatisticsResponse {
-    private double dailyStatic;
+    private double dailyStatistic;
     private List<RoutineResponse> routines;
 }

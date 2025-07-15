@@ -23,4 +23,13 @@ public interface RoutineLogRepository extends JpaRepository<RoutineLog, Long> {
     List<RoutineLog> findLogsInRange(@Param("routineIds") List<Long> routineIds,
                                      @Param("startDate") LocalDate startDate,
                                      @Param("endDate") LocalDate endDate);
+
+    // 루틴 id로 log 삭제
+    void deleteByRoutineId(Long routineId);
+
+    // 기존 시작일자 이전 로그 삭제
+    void deleteByRoutineIdAndDateBefore(Long routineId, LocalDate date);
+
+    // 기존 종료일자 이후 로그 삭제
+    void deleteByRoutineIdAndDateAfter(Long routineId, LocalDate date);
 }
