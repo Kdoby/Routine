@@ -7,7 +7,7 @@ export default function MonthlyRoutine() {
         backgroundColor: "white",
         width: "249px",
         height: "279px",
-        margin: "20px",
+        marginLeft: "33.5px",
         display: "inline-block"
     }}>
         <div className={"MR_wrapper"}>

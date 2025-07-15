@@ -9,9 +9,9 @@ function App() {
     const [userId, setUserId] = useState('');
     const [selectedView, setSelectedView] = useState(true);
     return (
-        <div style={{display: "flex", margin: "10%", marginTop:"5%"}}>
+        <div style={{display: "flex", justifyContent:"center", alignContent:"center", padding: "70px 210px"}}>
             <RoutineList userId={userId}/>
-            <div style={{display: "flex", flexDirection: "column"}}>
+            <div style={{display: "flex", flexDirection: "column", width:"70%"}}>
                 <div className={"RoutineHeader"}>
                     <input type="text" value={userId} onChange={(e) => setUserId(e.target.value)}></input>
                     <button className={"CurrentDate"} >현재 날짜로 이동</button>

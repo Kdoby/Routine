@@ -1,3 +1,18 @@
+/* MonthlyView.js */
+.MR_view_wrapper {
+    background-color: #f3f3f3;
+    border-radius: 20px;
+    border: none;
+    width: 100%;
+    height: 100%;
+    margin: 2px;
+    /*display: flex;*/
+    /*justify-content: center; !*자식 div를 x축 중앙으로 정렬*!*/
+    padding-top: 40px;
+    flex-wrap: wrap;
+}
+
+/* MonthlyRoutine.js */
 .completedDay {
     background-color: gray;
     border-radius: 5px;
