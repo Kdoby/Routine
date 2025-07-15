@@ -1,7 +1,7 @@
 import {useState} from "react";
 import './RoutineList.css';
 
-export default function Routine() {
+export default function Routine({name}) {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const toggleDropdown = () => {
         setIsDropdownOpen(!isDropdownOpen);
@@ -10,7 +10,7 @@ export default function Routine() {
     return (
         <div className={"L_listItem"}>
             <div className={"L_flag"} />
-            <div className={"L_title"}>brush teeth on the morning</div>
+            <div className={"L_title"}>{name}</div>
             <div className={"L_menu"} onClick={toggleDropdown}>
                 <img style={{height: "15px"}} src={"./menu.png"} alt={"menu"}/>
                 {isDropdownOpen && (
