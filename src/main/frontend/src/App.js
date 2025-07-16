@@ -31,9 +31,14 @@ function App() {
         fetchMonthlyStats();
     }, [userId, year, month]);
 
+    // delete 후 화면 반영
+    const handleDelete = (id) => {
+        setMonthlyList(prev => prev.filter(r => r.id !== id));
+    }
+
     return (
         <div style={{display: "flex", justifyContent:"center", alignContent:"center", padding: "70px 210px"}}>
-            <RoutineList userId={userId} list={monthlyList}/>
+            <RoutineList userId={userId} list={monthlyList} onDelete={handleDelete}/>
             <div style={{display: "flex", flexDirection: "column", width:"70%"}}>
                 <div className={"RoutineHeader"}>
                     <input type="text" value={userId} onChange={(e) => setUserId(e.target.value)}></input>
