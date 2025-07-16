@@ -7,8 +7,9 @@ export default function MonthlyRoutine({routine, year, month}) {
     const firstDay = new Date(year, month-1, 1).getDay();
     const calendarCells = [];
     for(let i=0, j=0; i<lastDate; i++){
-        if(j < routine.dates.size && i+1 === routine.dates[j]) {
+        if(j < routine.dates.length && i+1 === routine.dates[j]) {
             calendarCells.push(true);
+            j++;
         }
         else {
             calendarCells.push(false);

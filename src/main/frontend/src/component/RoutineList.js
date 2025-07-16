@@ -3,7 +3,7 @@ import './RoutineList.css';
 import AddRoutine from "./AddRoutine";
 import {useState} from "react";
 
-export default function RoutineList({userId, list, onDelete}) {
+export default function RoutineList({userId, list, onAdd, onDelete}) {
     const [isAddOpen, setIsAddOpen] = useState(false);
     return (
         <div className={"L_leftList"}>
@@ -13,7 +13,7 @@ export default function RoutineList({userId, list, onDelete}) {
                 <Routine name={item.name} key={item.id} id={item.id} onDelete={onDelete}/>
             ))}
             <button className={"AddRoutineButton"} onClick={() => setIsAddOpen(true)}>+</button>
-            <AddRoutine userId={userId} isOpen={isAddOpen} closeModal={() => setIsAddOpen(false)}/>
+            <AddRoutine userId={userId} onAdd={onAdd} isOpen={isAddOpen} closeModal={() => setIsAddOpen(false)}/>
         </div>
 
     );

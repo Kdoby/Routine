@@ -2,7 +2,7 @@ import {useState} from "react";
 import axios from 'axios';
 import "./RoutineList.css";
 
-export default function AddRoutine({userId, isOpen, closeModal}) {
+export default function AddRoutine({userId, onAdd, isOpen, closeModal}) {
      const [routineName, setRoutineName] = useState('');
      const [startDate, setStartDate] = useState('');
      const [endDate, setEndDate] = useState('');
@@ -38,6 +38,14 @@ export default function AddRoutine({userId, isOpen, closeModal}) {
              });
              if(res.data.success) {
                  alert(res.data.message);
+                 const newRoutine = {
+                     id: res.data.data,
+                     name: routineName ?? "", // null, undefined 방지
+                     isClosed: false,
+                     monthlyStatistic: 0,
+                     dates: []
+                 }
+                 onAdd(newRoutine);
                  closeModal();
                  setRoutineName('');
                  setStartDate('');

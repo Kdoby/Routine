@@ -30,7 +30,10 @@ function App() {
         if (!userId) return;
         fetchMonthlyStats();
     }, [userId, year, month]);
-
+    // add 후 화면 반영
+    const handleAdd = (newRoutine) => {
+        setMonthlyList(prev => [...prev, newRoutine]);
+    }
     // delete 후 화면 반영
     const handleDelete = (id) => {
         setMonthlyList(prev => prev.filter(r => r.id !== id));
@@ -38,7 +41,7 @@ function App() {
 
     return (
         <div style={{display: "flex", justifyContent:"center", alignContent:"center", padding: "70px 210px"}}>
-            <RoutineList userId={userId} list={monthlyList} onDelete={handleDelete}/>
+            <RoutineList userId={userId} list={monthlyList} onAdd={handleAdd} onDelete={handleDelete}/>
             <div style={{display: "flex", flexDirection: "column", width:"70%"}}>
                 <div className={"RoutineHeader"}>
                     <input type="text" value={userId} onChange={(e) => setUserId(e.target.value)}></input>
