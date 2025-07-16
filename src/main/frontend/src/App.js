@@ -54,7 +54,7 @@ function App() {
                         }
                     }}><p className={"ViewWeekly"} style={{color: !selectedView ? 'black' : 'lightgray'}}>주간</p></div>
                 </div>
-                {selectedView && <MonthlyView />}
+                {selectedView && <MonthlyView list={monthlyList} year={year} month={month}/>}
                 {!selectedView && <WeeklyView />}
             </div>
 
