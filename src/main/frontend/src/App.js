@@ -71,7 +71,7 @@ function App() {
                 </div>
                 {selectedView === 0 && <MonthlyView list={monthlyList} year={year} month={month}/>}
                 {selectedView === 1 && <WeeklyView userId={userId} year={year} month={month} date={date}/>}
-                {selectedView === 2 && <DailyRoutine userId={userId} date={today}/>}
+                {selectedView === 2 && <DailyRoutine userId={userId} date={today} fetchMonthly={fetchMonthlyStats} />}
             </div>
 
         </div>

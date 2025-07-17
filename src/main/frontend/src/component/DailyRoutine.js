@@ -1,7 +1,7 @@
 import axios from "axios";
 import {useEffect, useState} from "react";
 
-export default function DailyRoutine({userId, date}){
+export default function DailyRoutine({userId, date, fetchMonthly}){
     const [dailyList, setDailyList] = useState({dailyStatistic: 0, routines: []}); // { double dailyStatistic, List<RoutineResponse> routines }
     // Daily - 리스트, 통계 받아오기
     const fetchDailyStats = async () => {
@@ -37,6 +37,7 @@ export default function DailyRoutine({userId, date}){
                         routine.id === id ? {...routine, isCompleted: isCompleted} : routine
                     )
                 })));
+                fetchMonthly();
             }
         } catch (err) {
             console.error('에러 발생: ', err);
