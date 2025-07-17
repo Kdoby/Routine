@@ -13,6 +13,7 @@ function App() {
     const year = today.getFullYear();
     const month = today.getMonth() + 1; // 0 = 1월, 1 = 2월, ...
     const date = today.getDate();
+
     const [selectedView, setSelectedView] = useState(0); // 0: Monthly / 1: Weekly / 2: Daily
     const [monthlyList, setMonthlyList] = useState([]);
 
@@ -69,7 +70,7 @@ function App() {
                     }}><p className={"ViewDaily"} style={{color: selectedView === 2 ? 'black' : 'lightgray'}}>일간</p></div>
                 </div>
                 {selectedView === 0 && <MonthlyView list={monthlyList} year={year} month={month}/>}
-                {selectedView === 1 && <WeeklyView />}
+                {selectedView === 1 && <WeeklyView userId={userId} year={year} month={month} date={date}/>}
                 {selectedView === 2 && <DailyRoutine userId={userId} date={today}/>}
             </div>
 

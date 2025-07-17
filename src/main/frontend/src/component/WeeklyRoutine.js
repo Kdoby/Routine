@@ -1,14 +1,22 @@
 import './WeeklyRoutine.css';
 
-export default function WeeklyRoutine() {
-
+export default function WeeklyRoutine({routine}) {
+    const calenderCells = [];
+    for(let i=1, j=0;i<=7;i++){
+        if(j < routine.days.length && i === routine.days[j]){
+            calenderCells.push(true);
+        }
+        else {
+            calenderCells.push(false);
+        }
+    }
     return <div>
         <div className={"WR_wrapper"}>
-            <p className={"WR_name"}>brush teeth on the morning</p>
-            <p className={"WR_achieve"}>60%</p>
+            <p className={"WR_name"}>{routine.name}</p>
+            <p className={"WR_achieve"}>{Math.floor(routine.weeklyStatistic * 100)}%</p>
             <div className={"WR_log_wrapper"}>
-                {Array(7).fill().map((_,i) => (
-                    <div className={"WR_log_date"} key={i}></div>
+                {calenderCells.map((date, idx) => (
+                    <div className={date ? "WR_log_date_T" : "WR_log_date_F"} key={idx} ></div>
                 ))}
             </div>
         </div>
