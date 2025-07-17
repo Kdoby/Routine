@@ -15,6 +15,8 @@ import java.util.List;
 public class MonthlyStatisticsResponse {
     private Long id;
     private String name;
+    private LocalDate startDate;
+    private LocalDate endDate;
     // 루틴 종료 여부
     private Boolean isClosed;
     // 루틴을 실행한 날짜 목록
