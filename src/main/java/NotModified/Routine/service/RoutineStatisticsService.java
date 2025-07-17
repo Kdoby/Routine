@@ -211,6 +211,8 @@ public class RoutineStatisticsService {
             result.add(MonthlyStatisticsResponse.builder()
                     .id(routine.getId())
                     .name(routine.getName())
+                    .startDate(routine.getStartDate())
+                    .endDate(routine.getEndDate())
                     .dates(dates)
                     .isClosed(routine.getIsClosed())
                     .monthlyStatistic(completionRate)
