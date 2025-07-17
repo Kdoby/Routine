@@ -36,3 +36,42 @@
     transform: rotate(360deg);
   }
 }
+
+.RoutineHeader {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.CurrentDate {
+  border-radius: 5px;
+  border: none;
+  margin-right: 10px;
+}
+
+.DateNavLabel {
+  margin-left: 34px;
+  margin-top: 10px;
+}
+
+.DateNavigator {
+  display: inline-block;
+  background-color: lightsteelblue;
+  height: 50px;
+  width: 200px;
+
+}
+
+.RoutineNavigator {
+  display: flex;
+  left: 20px;
+}
+
+.ViewButton {
+  margin-left: 20px;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.ViewMonthly, .ViewWeekly, .ViewDaily {
+  font-size: 20px;
+}
