@@ -3,6 +3,7 @@ package NotModified.Routine.repository.interfaces;
 import NotModified.Routine.domain.Routine;
 import NotModified.Routine.domain.RoutineLog;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -26,4 +27,9 @@ public interface RoutineRepository extends JpaRepository<Routine, Long> {
     List<Routine> findRoutinesInMonth(@Param("userId") String userId,
                                             @Param("firstDay") LocalDate firstDay,
                                             @Param("lastDay") LocalDate lastDay);
+
+    // 반복 종료일자를 넘기면 루틴 자동 종료
+    @Modifying
+    @Query("UPDATE Routine r SET r.isClosed = true WHERE r.endDate < :today AND r.isClosed = false")
+    int closedExpiredRoutines(@Param("today") LocalDate today);
 }
