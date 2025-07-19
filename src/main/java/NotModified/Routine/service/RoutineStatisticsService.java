@@ -47,12 +47,14 @@ public class RoutineStatisticsService {
             // targetDate 요일을 반복 요일이 포함하고 있지 않으면 pass
             if(!repeatDays.contains(weekDay)) continue;
 
+            size++;
+
+            // 해당 날짜에 루틴 로그가 존재하는지 확인
             Optional<RoutineLog> logOpt = routineLogRepository.findLog(routine.getId(), targetDate);
             boolean isCompleted = logOpt.isPresent() && logOpt.get().getIsCompleted();
 
             // 기록이 존재하고, 달성한 루틴인 경우 count + 1
             if(isCompleted) completeCount++;
-            size++;
 
             result.add((RoutineResponse.builder()
                     .id(routine.getId())
@@ -65,7 +67,7 @@ public class RoutineStatisticsService {
 
         }
 
-        double completionRate = size == 0 ? 0.0 : (double) completeCount / size;
+        double completionRate = size == 0 ? 0.0 : Math.round((double) completeCount / size * 100);
 
         return DailyStatisticsResponse.builder()
                 .dailyStatistic(completionRate)
@@ -133,7 +135,7 @@ public class RoutineStatisticsService {
                 }
             }
 
-            double completionRate = totalDays == 0 ? 0.0 : (double) completedCount / totalDays;
+            double completionRate = totalDays == 0 ? 0.0 : Math.round((double) completedCount / totalDays * 100);
 
             result.add(WeeklyStatisticsResponse.builder()
                     .id(routine.getId())
@@ -206,7 +208,7 @@ public class RoutineStatisticsService {
                 }
             }
 
-            double completionRate = totalDays == 0 ? 0.0 : (double) completedCount / totalDays;
+            double completionRate = totalDays == 0 ? 0.0 : Math.round((double) completedCount / totalDays * 100);
 
             result.add(MonthlyStatisticsResponse.builder()
                     .id(routine.getId())
