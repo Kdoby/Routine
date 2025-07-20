@@ -24,6 +24,7 @@ public class RoutineService {
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 루틴입니다."));
     }
 
+    // 루틴 등록
     public Long registerRoutine(RoutineCreateRequest dto) {
         Routine newRoutine = Routine.builder()
                 .userId(dto.getUserId())
@@ -54,5 +55,11 @@ public class RoutineService {
     public void removeRoutine(Long routineId) {
         Routine routine = findById(routineId);
         routineRepository.delete(routine);
+    }
+
+    // 루틴 종료
+    public void updateIsClosed(Long routineId) {
+        Routine routine = findById(routineId);
+        routine.setIsClosed(true);
     }
 }

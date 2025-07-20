@@ -76,6 +76,7 @@ public class RoutineApiController {
         return routineStatisticsService.getMonthlyStatisticsForAllRoutines(userId, year, month);
     }
 
+    // 루틴 수정
     @PutMapping("/routine")
     public ResponseEntity<?> updateRoutine(@RequestBody RoutineUpdateRequest request) {
         routineService.updateRoutine(request);
@@ -87,6 +88,7 @@ public class RoutineApiController {
         ));
     }
 
+    // 루틴 삭제
     @DeleteMapping("/routine/{routineId}")
     public ResponseEntity<?> deleteRoutine(@PathVariable("routineId") Long id) {
         routineService.removeRoutine(id);
@@ -99,4 +101,13 @@ public class RoutineApiController {
         ));
     }
 
+    // 루틴 종료
+    @PutMapping("/routine/close/{routineId}")
+    public ResponseEntity<?> closeRoutine(@PathVariable("routineId") Long id) {
+        routineService.updateIsClosed(id);
+        return ResponseEntity.ok(Map.of(
+                "success", true,
+                "message", "루틴 종료 성공"
+        ));
+    }
 }
