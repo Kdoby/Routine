@@ -6,7 +6,7 @@ export default function AddRoutine({userId, onAdd, isOpen, closeModal}) {
      const [routineName, setRoutineName] = useState('');
      const [startDate, setStartDate] = useState('');
      const [endDate, setEndDate] = useState('');
-     const [selectedDays, setSelectedDays] = useState([]);
+     const [selectedDays, setSelectedDays] = useState(['1','2','3','4','5','6','7']);
      const days = [
          { label: '월', value: '2'},
          { label: '화', value: '3'},
