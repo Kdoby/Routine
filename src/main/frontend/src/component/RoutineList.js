@@ -10,7 +10,7 @@ export default function RoutineList({userId, list, onAdd, onDelete}) {
             <h2>Routine</h2>
             <hr />
             {list.map((item, index) => (
-                <Routine name={item.name} key={item.id} id={item.id} onDelete={onDelete}/>
+                <Routine routine={item} key={item.id} onDelete={onDelete}/>
             ))}
             <button className={"AddRoutineButton"} onClick={() => setIsAddOpen(true)}>+</button>
             <AddRoutine userId={userId} onAdd={onAdd} isOpen={isAddOpen} closeModal={() => setIsAddOpen(false)}/>

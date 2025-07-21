@@ -56,7 +56,12 @@ export default function AddRoutine({userId, onAdd, isOpen, closeModal}) {
                  console.log("루틴 등록 실패");
              }
          } catch (err) {
-             console.error('에러 발생: ', err);
+             if(err.response && err.response.message) {
+                 alert('에러 발생: ', err.response.data.message);
+             }
+             else {
+                 alert('루틴 등록 오류 발생');
+             }
          }
      };
 
