@@ -15,9 +15,10 @@ function App() {
     const date = today.getDate();
 
     const [selectedView, setSelectedView] = useState(0); // 0: Monthly / 1: Weekly / 2: Daily
-    const [monthlyList, setMonthlyList] = useState([]);
 
     // monthly - 리스트, 통계 받아오기
+    const [monthlyList, setMonthlyList] = useState([]);
+
     const fetchMonthlyStats = async () => {
         try {
             const res = await axios.get(`/api/routine/monthly/${userId}/${year}/${month}`);
@@ -32,6 +33,49 @@ function App() {
         if (!userId) return;
         fetchMonthlyStats();
     }, [userId, year, month]);
+
+    // weekly - 리스트, 통계 받아오기
+    const [weeklyList, setWeeklyList] = useState([]);
+
+    // 특정 날짜가 그 달의 몇번째 주인지 계산하기
+    const firstdayOfWeek =new Date(year, month-1, 1).getDay(); // 1일의 요일
+    const weekInMonth = Math.ceil((date + firstdayOfWeek) / 7); // 몇번째 주
+
+    const fetchWeeklyStats = async () => {
+        try {
+            const res = await axios.get(`/api/routine/weekly/${userId}/${year}/${month}/${weekInMonth}`);
+            setWeeklyList(res.data);
+            console.log("주간 통계 받아오기: ", res.data);
+        } catch (e) {
+            console.error("fail fetch: ", e);
+        }
+    };
+    useEffect(() => {
+        if (!userId || !year || !month || !date) {
+            return;
+        }
+        fetchWeeklyStats();
+    }, [userId, year, month]);
+
+    // Daily - 리스트, 통계 받아오기
+    const [dailyList, setDailyList] = useState({dailyStatistic: 0, routines: []}); // { double dailyStatistic, List<RoutineResponse> routines }
+
+    const fetchDailyStats = async () => {
+        try{
+            const res = await axios.get(`/api/routine/daily/${userId}/${today.toISOString().slice(0,10)}`);
+            setDailyList(res.data);
+            console.log("일간 통계 받아오기: ", res.data);
+        } catch (e){
+            console.error("fail fetch: ", e);
+        }
+    }
+    useEffect(()=>{
+        if(!userId || !date) {
+            return;
+        }
+        fetchDailyStats();
+    }, [userId, date]);
+
     // add 후 화면 반영
     const handleAdd = (newRoutine) => {
         setMonthlyList(prev => [...prev, newRoutine]);
@@ -43,7 +87,7 @@ function App() {
 
     return (
         <div style={{display: "flex", justifyContent:"center", alignContent:"center", padding: "70px 210px"}}>
-            <RoutineList userId={userId} list={monthlyList} onAdd={handleAdd} onDelete={handleDelete}/>
+            <RoutineList userId={userId} list={selectedView === 0 ? monthlyList : selectedView === 1 ? weeklyList : dailyList.routines} onAdd={handleAdd} onDelete={handleDelete}/>
             <div style={{display: "flex", flexDirection: "column", width:"70%"}}>
                 <div className={"RoutineHeader"}>
                     <input type="text" value={userId} onChange={(e) => setUserId(e.target.value)}></input>
@@ -69,9 +113,9 @@ function App() {
                         }
                     }}><p className={"ViewDaily"} style={{color: selectedView === 2 ? 'black' : 'lightgray'}}>일간</p></div>
                 </div>
-                {selectedView === 0 && <MonthlyView list={monthlyList} year={year} month={month}/>}
-                {selectedView === 1 && <WeeklyView userId={userId} year={year} month={month} date={date}/>}
-                {selectedView === 2 && <DailyRoutine userId={userId} date={today} fetchMonthly={fetchMonthlyStats} />}
+                {selectedView === 0 && <MonthlyView list={monthlyList} year={year} month={month} />}
+                {selectedView === 1 && <WeeklyView list={weeklyList} />}
+                {selectedView === 2 && <DailyRoutine list ={dailyList} date={today} setList={setDailyList} />}
             </div>
 
         </div>
