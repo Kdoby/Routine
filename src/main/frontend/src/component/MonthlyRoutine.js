@@ -21,7 +21,6 @@ export default function MonthlyRoutine({routine, year, month}) {
         borderRadius: "15px",
         backgroundColor: "white",
         width: "249px",
-        height: "279px",
         marginLeft: "33.5px",
         display: "inline-block"
     }}>
