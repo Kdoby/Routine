@@ -47,11 +47,6 @@ function App() {
             return newDate;
         });
     };
-    // 날짜 선택
-    const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
-    const toggleDatePicker = () => {
-        setIsDatePickerOpen(prev => !prev);
-    }
 
     // monthly - 리스트, 통계 받아오기
     const [monthlyList, setMonthlyList] = useState([]);
@@ -142,7 +137,7 @@ function App() {
             <div style={{display: "flex", flexDirection: "column", width:"70%"}}>
                 <div className={"RoutineHeader"}>
                     <input type="text" value={userId} onChange={(e) => setUserId(e.target.value)}></input>
-                    <button className={"CurrentDate"} >현재 날짜로 이동</button>
+                    <button className={"CurrentDate"} onClick={() => setSelectedDate(new Date())}>현재 날짜로 이동</button>
                     <div className={"DateNavigator"} >
                         <button className={"DateNavButton"} onClick={handlePrev}><img className={"DateNavImg"} src={"./left.png"} alt={"leftButton"}/></button>
                         <div>
