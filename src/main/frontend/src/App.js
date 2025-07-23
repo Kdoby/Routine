@@ -139,9 +139,12 @@ function App() {
         );
     }
 
+    // 활성 루틴 보기 상태 (true: 활성 루틴 출력, false: 종료 루틴 출력)
+    const [showActive, setShowActive] = useState(true);
+
     return (
         <div style={{display: "flex", justifyContent:"center", alignContent:"center", padding: "70px 210px"}}>
-            <RoutineList userId={userId} list={selectedView === 0 ? monthlyList : selectedView === 1 ? weeklyList : dailyList.routines} onAdd={handleAdd} onDelete={handleDelete} onClose={handleClose} />
+            <RoutineList userId={userId} list={selectedView === 0 ? monthlyList : selectedView === 1 ? weeklyList : dailyList.routines} onAdd={handleAdd} onDelete={handleDelete} onClose={handleClose} showActive={showActive} setShowActive={setShowActive} />
             <div style={{display: "flex", flexDirection: "column", width:"70%"}}>
                 <div className={"RoutineHeader"}>
                     <input type="text" value={userId} onChange={(e) => setUserId(e.target.value)}></input>
@@ -181,8 +184,8 @@ function App() {
                         }
                     }}><p className={"ViewDaily"} style={{color: selectedView === 2 ? 'black' : 'lightgray'}}>일간</p></div>
                 </div>
-                {selectedView === 0 && <MonthlyView list={monthlyList} year={year} month={month} />}
-                {selectedView === 1 && <WeeklyView list={weeklyList} />}
+                {selectedView === 0 && <MonthlyView list={monthlyList} year={year} month={month} showActive={showActive}/>}
+                {selectedView === 1 && <WeeklyView list={weeklyList} showActive={showActive} />}
                 {selectedView === 2 && <DailyRoutine list ={dailyList} date={selectedDate} setList={setDailyList} />}
             </div>
 

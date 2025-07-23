@@ -57,19 +57,21 @@ export default function Routine({routine, onDelete, onClose}) {
         <div className={"L_listItem"}>
             <div className={"L_flag"} />
             <div className={"L_title"}>{routine.name}</div>
-            <div className={"L_menu"} onClick={toggleDropdown}>
-                <img style={{height: "15px"}} src={"./menu.png"} alt={"menu"}/>
-                {isDropdownOpen && (
-                    <div className={"L_dropdown"}>
-                        <div className={"L_dropdownItem"} onClick={OpenUpdateModal}>수정</div>
-                        <div className={"L_dropdownItem"} onClick={clo}> 종료</div>
-                        <div className={"L_dropdownItem"} onClick={del}>삭제</div>
-                    </div>
-                )}
-                {isUpdateOpen && (
-                    <UpdateRoutine routine={routine} isOpen={isUpdateOpen} onClose={CloseUpdateModal}/>
-                )}
-            </div>
+            {routine.isClosed === false && ( /* 종료된 루틴은 수정 종료 삭제 불가 */
+                <div className={"L_menu"} onClick={toggleDropdown}>
+                    <img style={{height: "15px"}} src={"./menu.png"} alt={"menu"}/>
+                    {isDropdownOpen && (
+                        <div className={"L_dropdown"}>
+                            <div className={"L_dropdownItem"} onClick={OpenUpdateModal}>수정</div>
+                            <div className={"L_dropdownItem"} onClick={clo}> 종료</div>
+                            <div className={"L_dropdownItem"} onClick={del}>삭제</div>
+                        </div>
+                    )}
+                    {isUpdateOpen && (
+                        <UpdateRoutine routine={routine} isOpen={isUpdateOpen} onClose={CloseUpdateModal}/>
+                    )}
+                </div>
+            )}
         </div>
     );
 }
