@@ -130,10 +130,18 @@ function App() {
             )
         }));
     }
+    // close 후 화면 반영
+    const handleClose = (id) => {
+        setMonthlyList(prev =>
+            prev.map(item =>
+                item.id === id ? {...item, isClosed: false} : item
+            )
+        );
+    }
 
     return (
         <div style={{display: "flex", justifyContent:"center", alignContent:"center", padding: "70px 210px"}}>
-            <RoutineList userId={userId} list={selectedView === 0 ? monthlyList : selectedView === 1 ? weeklyList : dailyList.routines} onAdd={handleAdd} onDelete={handleDelete}/>
+            <RoutineList userId={userId} list={selectedView === 0 ? monthlyList : selectedView === 1 ? weeklyList : dailyList.routines} onAdd={handleAdd} onDelete={handleDelete} onClose={handleClose} />
             <div style={{display: "flex", flexDirection: "column", width:"70%"}}>
                 <div className={"RoutineHeader"}>
                     <input type="text" value={userId} onChange={(e) => setUserId(e.target.value)}></input>

@@ -3,7 +3,7 @@ import './RoutineList.css';
 import axios from "axios";
 import UpdateRoutine from "./UpdateRoutine";
 
-export default function Routine({routine, onDelete}) {
+export default function Routine({routine, onDelete, onClose}) {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const toggleDropdown = () => {
         setIsDropdownOpen(!isDropdownOpen);
@@ -20,12 +20,30 @@ export default function Routine({routine, onDelete}) {
     // 루틴 삭제
     const del = async (e) => {
         e.stopPropagation();
-        if(!window.confirm(`{name}을 삭제하시겠습니까?`)) return;
+        if(!window.confirm(`${routine.name}을 삭제하시겠습니까?`)) return;
         try {
             onDelete(routine.id);
             const response = await axios.delete(`/api/routine/${routine.id}`);
             if(response.data.success) {
                 console.log(response.data.message);
+            }
+            else {
+                console.error('삭제 실패: ', response.data.message);
+            }
+        } catch (err) {
+            console.error('에러 발생: ', err);
+        }
+    }
+    // 루틴 종료
+    const clo = async (e) => {
+        e.stopPropagation();
+        if (!window.confirm(`${routine.name} 루틴 진행을 종료하시겠습니까?`)) return;
+        try {
+            onClose(routine.id);
+            const response = await axios.put(`/api/routine/close/${routine.id}`);
+            if (response.data.success) {
+                console.log(response.data.message);
+                alert('루틴을 종료하였습니다.');
             }
             else {
                 console.error('삭제 실패: ', response.data.message);
@@ -44,7 +62,7 @@ export default function Routine({routine, onDelete}) {
                 {isDropdownOpen && (
                     <div className={"L_dropdown"}>
                         <div className={"L_dropdownItem"} onClick={OpenUpdateModal}>수정</div>
-                        <div className={"L_dropdownItem"}>종료</div>
+                        <div className={"L_dropdownItem"} onClick={clo}> 종료</div>
                         <div className={"L_dropdownItem"} onClick={del}>삭제</div>
                     </div>
                 )}
