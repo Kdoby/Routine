@@ -7,16 +7,6 @@ export default function UpdateRoutine ({routine, isOpen, onClose, onUpdate}) {
     const [startDate, setStartDate] = useState(routine.startDate);
     const [endDate, setEndDate] = useState(routine.endDate);
 
-    const days = [
-        { label: '월', value: '2'},
-        { label: '화', value: '3'},
-        { label: '수', value: '4'},
-        { label: '목', value: '5'},
-        { label: '금', value: '6'},
-        { label: '토', value: '7'},
-        { label: '일', value: '1'}
-    ];
-
     const handleSubmit = async (e) => {
         e.preventDefault();
 
