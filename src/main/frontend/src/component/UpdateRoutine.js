@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useRef, useState} from "react";
 import axios from 'axios';
 import "./RoutineList.css";
 
@@ -6,10 +6,17 @@ export default function UpdateRoutine ({routine, isOpen, onClose, onUpdate}) {
     const [routineName, setRoutineName] = useState(routine.name);
     const [startDate, setStartDate] = useState(routine.startDate);
     const [endDate, setEndDate] = useState(routine.endDate);
+    const nameRef = useRef();
+    const startRef = useRef();
+    const endRef = useRef();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        if(new Date(endDate) <= new Date(startDate)) {
+            alert("종료일은 시작일 이후로 선택해주세요.");
+            endRef.current.focus();
+            return;
+        }
         try {
             const updatedData = {
                 routineId: routine.id,
@@ -64,17 +71,17 @@ export default function UpdateRoutine ({routine, isOpen, onClose, onUpdate}) {
 
                     <form className={"AR_form"}>
                         <div>
-                            <input type="text" className={"AR_routineName"} placeholder={"루틴 이름"} value={routineName} onChange={(e) => setRoutineName(e.target.value)}></input>
+                            <input type="text" ref={nameRef} className={"AR_routineName"} placeholder={"루틴 이름"} value={routineName} onChange={(e) => setRoutineName(e.target.value)}></input>
                         </div>
                         <div>
                             <label htmlFor="start-date" className={"AR_inputLabel"}>시작일 &nbsp;&nbsp;| &nbsp;&nbsp;</label>
-                            <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} id="start-date" name="start-date" required/>
+                            <input type="date" ref={startRef} value={startDate} onChange={(e) => setStartDate(e.target.value)} id="start-date" name="start-date" required/>
 
                         </div>
 
                         <div>
                             <label htmlFor="end-date" className={"AR_inputLabel"}>종료일 &nbsp;&nbsp;| &nbsp;&nbsp;</label>
-                            <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} id="end-date" name="end-date" required/>
+                            <input type="date" ref={endRef} value={endDate} onChange={(e) => setEndDate(e.target.value)} id="end-date" name="end-date" required/>
                         </div>
 
                         <button className={"AR_submit"} onClick={handleSubmit}>수정</button>
