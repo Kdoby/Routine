@@ -13,7 +13,7 @@ export default function WeeklyRoutine({routine}) {
     return <div>
         <div className={"WR_wrapper"}>
             <p className={"WR_name"}>{routine.name}</p>
-            <p className={"WR_achieve"}>{Math.floor(routine.weeklyStatistic * 100)}%</p>
+            <p className={"WR_achieve"}>{routine.weeklyStatistic}%</p>
             <div className={"WR_log_wrapper"}>
                 {calenderCells.map((date, idx) => (
                     <div className={date ? "WR_log_date_T" : "WR_log_date_F"} key={idx} ></div>
