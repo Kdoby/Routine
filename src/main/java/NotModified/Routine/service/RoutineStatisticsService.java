@@ -140,6 +140,8 @@ public class RoutineStatisticsService {
             result.add(WeeklyStatisticsResponse.builder()
                     .id(routine.getId())
                     .name(routine.getName())
+                    .startDate(routine.getStartDate())
+                    .endDate(routine.getEndDate())
                     .days(days)
                     .isClosed(routine.getIsClosed())
                     .weeklyStatistic(completionRate)

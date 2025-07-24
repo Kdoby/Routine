@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Builder
@@ -14,6 +15,8 @@ import java.util.List;
 public class WeeklyStatisticsResponse {
     private Long id;
     private String name;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private Boolean isClosed;
     // 루틴을 실행한 요일 목록
     private List<Integer> days;
