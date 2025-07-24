@@ -116,8 +116,9 @@ function App() {
     }
 
     // add 후 화면 반영
-    const handleAdd = (newRoutine) => {
-        setMonthlyList(prev => [...prev, newRoutine]);
+    const handleAdd = (monthlyRoutine, weeklyRoutine) => {
+        setMonthlyList(prev => [...prev, monthlyRoutine]);
+        setWeeklyList(prev => [...prev, weeklyRoutine]);
     }
     // delete 후 화면 반영
     const handleDelete = (id) => {
@@ -137,6 +138,24 @@ function App() {
                 item.id === id ? {...item, isClosed: false} : item
             )
         );
+        setWeeklyList(prev =>
+            prev.map(item =>
+                item.id === id ? {...item, isClosed: false} : item
+            )
+        );
+    }
+    // update 후 화면 반영
+    const handleUpdate = (updatedData) => {
+        setMonthlyList(prev =>
+            prev.map(item =>
+                item.id === updatedData.routineId ? {...item, name: updatedData.name, startDate: updatedData.startDate, endDate: updatedData.endDate} : item
+            )
+        );
+        setWeeklyList(prev =>
+            prev.map(item =>
+                item.id === updatedData.routineId ? {...item, name: updatedData.name, startDate: updatedData.startDate, endDate: updatedData.endDate} : item
+            )
+        );
     }
 
     // 활성 루틴 보기 상태 (true: 활성 루틴 출력, false: 종료 루틴 출력)
@@ -144,7 +163,7 @@ function App() {
 
     return (
         <div style={{display: "flex", justifyContent:"center", alignContent:"center", padding: "70px 210px"}}>
-            <RoutineList userId={userId} list={selectedView === 0 ? monthlyList : selectedView === 1 ? weeklyList : dailyList.routines} onAdd={handleAdd} onDelete={handleDelete} onClose={handleClose} showActive={showActive} setShowActive={setShowActive} />
+            <RoutineList userId={userId} list={selectedView === 0 ? monthlyList : selectedView === 1 ? weeklyList : dailyList.routines} onAdd={handleAdd} onDelete={handleDelete} onClose={handleClose} onUpdate={handleUpdate} showActive={showActive} setShowActive={setShowActive} />
             <div style={{display: "flex", flexDirection: "column", width:"70%"}}>
                 <div className={"RoutineHeader"}>
                     <input type="text" value={userId} onChange={(e) => setUserId(e.target.value)}></input>

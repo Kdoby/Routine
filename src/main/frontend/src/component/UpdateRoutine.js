@@ -2,7 +2,7 @@ import {useState} from "react";
 import axios from 'axios';
 import "./RoutineList.css";
 
-export default function UpdateRoutine ({routine, isOpen, onClose}) {
+export default function UpdateRoutine ({routine, isOpen, onClose, onUpdate}) {
     const [routineName, setRoutineName] = useState(routine.name);
     const [startDate, setStartDate] = useState(routine.startDate);
     const [endDate, setEndDate] = useState(routine.endDate);
@@ -21,15 +21,17 @@ export default function UpdateRoutine ({routine, isOpen, onClose}) {
         e.preventDefault();
 
         try {
-            const res = await axios.put('/api/routine', {
+            const updatedData = {
                 routineId: routine.id,
                 name: routineName,
                 startDate: startDate,
                 endDate: endDate
-            });
+            };
+            const res = await axios.put('/api/routine', updatedData);
             if (res.data.success) {
                 alert(res.data.message);
                 onClose();
+                onUpdate(updatedData);
             }
             else {
                 console.log("루틴 수정 실패: ", res.data.message);

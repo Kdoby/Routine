@@ -3,7 +3,7 @@ import './RoutineList.css';
 import axios from "axios";
 import UpdateRoutine from "./UpdateRoutine";
 
-export default function Routine({routine, onDelete, onClose}) {
+export default function Routine({routine, onDelete, onClose, onUpdate}) {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const toggleDropdown = () => {
         setIsDropdownOpen(!isDropdownOpen);
@@ -68,7 +68,7 @@ export default function Routine({routine, onDelete, onClose}) {
                         </div>
                     )}
                     {isUpdateOpen && (
-                        <UpdateRoutine routine={routine} isOpen={isUpdateOpen} onClose={CloseUpdateModal}/>
+                        <UpdateRoutine routine={routine} isOpen={isUpdateOpen} onClose={CloseUpdateModal} onUpdate={onUpdate}/>
                     )}
                 </div>
             )}
