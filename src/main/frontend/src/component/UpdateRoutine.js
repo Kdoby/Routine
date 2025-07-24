@@ -21,7 +21,7 @@ export default function UpdateRoutine ({routine, isOpen, onClose}) {
         e.preventDefault();
 
         try {
-            const res = await axios.post('/api/routine', {
+            const res = await axios.put('/api/routine', {
                 routineId: routine.id,
                 name: routineName,
                 startDate: startDate,
