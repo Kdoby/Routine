@@ -36,3 +36,61 @@
     transform: rotate(360deg);
   }
 }
+
+.RoutineHeader {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.CurrentDate {
+  border-radius: 5px;
+  border: none;
+  margin-right: 10px;
+}
+
+.DateNavLabel {
+  display: inline-block;
+  cursor : pointer;
+}
+
+.DateNavigator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: lightsteelblue;
+  height: 50px;
+  width: 240px;
+
+}
+
+.DateNavButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.DateNavImg {
+  width: 30px;
+  height: 30px;
+}
+
+.RoutineNavigator {
+  display: flex;
+  left: 20px;
+}
+
+.ViewButton {
+  margin-left: 20px;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.ViewMonthly, .ViewWeekly, .ViewDaily {
+  font-size: 20px;
+}
